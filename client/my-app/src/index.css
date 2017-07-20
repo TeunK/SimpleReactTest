@@ -1,7 +1,7 @@
 body {
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
-    background-image: url("https://www.walldevil.com/wallpapers/a51/background-wallpapers-web-images-dvisiondesign-wallpaper-stitched-paper-grey-desktop.jpg");
+    background-image: url("http://deskbg.com/s3/wpp/0/208/edinburgh-desktop-background.jpg");
 }
 
 ol, ul {
@@ -149,6 +149,15 @@ ol, ul {
 .float-r {
     float:right;
 }
+.flex {
+    display: flex;
+}
+.flex-size-1{
+    flex:1;
+}
 .mh400 {
     min-height:400px;
+}
+.mh600 {
+    min-height:600px;
 }
