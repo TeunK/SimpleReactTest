@@ -1,25 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CryptoJS from 'crypto-js'
 import './index.css';
 import './forms.css';
-import CryptoJS from 'crypto-js'
+
+const serverData = {
+    path: "http://localhost:3000",
+    endpoints: {
+        POST: {
+            registerStudent: "/register_student"
+        },
+        GET: {
+            allStudents: "/all_students"
+        }
+    }
+};
 
 class StudentRegistrationForm extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            name: "",
-            email: "",
-            password: "",
-            gender: "",
-            error: {
-                name: "",
-                email: "",
-                password: "",
-                gender: ""
-            }
-        };
+        this.state = this.getInitialState();
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,34 +50,87 @@ class StudentRegistrationForm extends React.Component {
             gender: this.state.gender
         };
 
-        const validName = this.isNameValid();
-        const validEmail = this.isEmailValid();
-        const validPassword = this.isPasswordValid();
-        const validGender = this.isGenderValid();
+        const isValid = this.validateInput();
 
-        if (validName.valid && validEmail.valid && validPassword.valid && validGender.valid) {
+        if (isValid) {
             alert('A name was submitted: ' + JSON.stringify(user, null, 2));
+            this.submitForm(user);
+            this.setState(
+                this.getInitialState()
+            );
         }
+    }
 
-        this.setState({
-            error: {
-                name: validName.error,
-                email: validEmail.error,
-                password: validPassword.error,
-                gender: validGender.error
-            }
+    submitForm(user) {
+        fetch(serverData.path + serverData.endpoints.POST.registerStudent, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
         })
+        .then((response) => {
+            alert(JSON.stringify(response, null, 2));
+        })
+        .then((responseData) => { // responseData = undefined
+            alert(JSON.stringify(responseData, null, 2));
+        })
+        .catch(function(err) {
+            alert(JSON.stringify(err, null, 2));
+        })
+    }
+
+    getInitialState() {
+        return {
+            name: "",
+            email: "",
+            password: "",
+            gender: "",
+            error: {
+                name: "",
+                email: "",
+                password: "",
+                gender: ""
+            }
+        }
+    }
+
+    validateInput() {
+        const testName = this.isNameValid();
+        const testEmail = this.isEmailValid();
+        const testPassword = this.isPasswordValid();
+        const testGender = this.isGenderValid();
+
+        if (testName.isValid && testEmail.isValid && testPassword.isValid && testGender.isValid) {
+            this.setState({
+                error: {}
+            });
+
+            return true;
+        } else {
+            this.setState({
+                error: {
+                    name: testName.error,
+                    email: testEmail.error,
+                    password: testPassword.error,
+                    gender: testGender.error
+                }
+            });
+
+            return false;
+        }
     }
 
     isNameValid() {
         if (this.state.name.length === 0) {
             return {
-                valid: false,
+                isValid: false,
                 error: "name field required"
             };
         }
 
-        return { valid: true, error:"" };
+        return { isValid: true, error:"" };
     }
 
     isEmailValid() {
@@ -85,39 +138,39 @@ class StudentRegistrationForm extends React.Component {
 
         if (this.state.email.length === 0) {
             return {
-                valid: false,
+                isValid: false,
                 error: "email field required"
             };
         } else if (!emailAddressFormat.test(this.state.email)) {
             return {
-                valid: false,
+                isValid: false,
                 error: "email must be of format s1581763@ed.ac.uk"
             };
         }
 
-        return { valid: true, error:"" };
+        return { isValid: true, error:"" };
     }
 
     isPasswordValid() {
         if (this.state.password.length < 6 || this.state.password.length > 24) {
             return {
-                valid: false,
+                isValid: false,
                 error: "password must be between 6 and 24 characters long"
             };
         }
 
-        return { valid: true, error:"" };
+        return { isValid: true, error:"" };
     }
 
     isGenderValid() {
         if (this.state.gender.length === 0) {
             return {
-                valid: false,
+                isValid: false,
                 error: "gender field required"
             };
         }
 
-        return { valid: true, error:"" };
+        return { isValid: true, error:"" };
     }
 
     render() {
