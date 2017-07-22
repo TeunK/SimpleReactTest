@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 var ObjectID = require('mongodb').ObjectID;
+var serverData = require('../settings/serverData.js');
+var errorCodes = require('../settings/errorCodes.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/all_students', function(req, res) {
     var db = req.db;
-    var collection = db.get('students');
+    var collection = db.get(serverData.dbCollections.users.students);
     collection.find({},{},function(e,data){
         res.json(data);
     });
@@ -31,19 +33,35 @@ router.post('/register_student', function(req, res) {
         res.json({"errors":errors});
     } else {
         var db = req.db;
-        var collection = db.get('students');
+        var collection = db.get(serverData.dbCollections.users.students);
         console.log(JSON.stringify(data, null, 2));
         data.addedDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         collection.insert(data, function(err, result) {
-                if (err) {res.json(err)}
-                if (result) {
-                    res.json({"message": "Student was added successfully!"});
+            if (err) {
+                if (err.code == errorCodes.duplicateEntry) {
+                    res.json({error: true, message: "A student with this email was already registered"})
                 } else {
-                    res.json(err);
+                    res.json(err)
                 }
+            } else if (result) {
+                res.json({message: "Student was added successfully!"});
+            } else {
+                res.json(err);
             }
-        );
+        });
     }
 });
+
+router.get('/delete_all_students', function(req, res) {
+    var db = req.db;
+    var collection = db.get(serverData.dbCollections.users.students);
+    collection.remove({},function(err, removed){
+        if (err) {res.json(err)}
+        if (removed) {
+            res.json(JSON.stringify(removed))
+        }
+    });
+});
+
 
 module.exports = router;
