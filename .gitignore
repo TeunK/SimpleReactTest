@@ -1,1 +1,4 @@
 client/my-app/package-lock.json
+server/.idea/
+server/data/
+server/node_modules/
