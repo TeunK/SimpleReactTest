@@ -53,7 +53,6 @@ class StudentRegistrationForm extends React.Component {
         const isValid = this.validateInput();
 
         if (isValid) {
-            alert('A name was submitted: ' + JSON.stringify(user, null, 2));
             this.submitForm(user);
             this.setState(
                 this.getInitialState()
@@ -71,13 +70,10 @@ class StudentRegistrationForm extends React.Component {
             body: JSON.stringify(user)
         })
         .then((response) => {
-            alert(JSON.stringify(response, null, 2));
         })
-        .then((responseData) => { // responseData = undefined
-            alert(JSON.stringify(responseData, null, 2));
+        .then((responseData) => {
         })
         .catch(function(err) {
-            alert(JSON.stringify(err, null, 2));
         })
     }
 
@@ -219,11 +215,63 @@ class StudentRegistrationForm extends React.Component {
 }
 
 class UsersField extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: []
+        };
+
+        this.fetchUsers = this.fetchUsers.bind(this);
+    }
+
+    fetchUsers() {
+        const self = this;
+        fetch(serverData.path + serverData.endpoints.GET.allStudents, {
+            //mode: 'no-cors',
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+            },
+        })
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(json => {
+                    self.setState({
+                        users: json
+                    });
+                });
+            } else {
+                alert("error")
+            }
+        })
+        .catch(function(err) {
+            // This is where you run code if the server returns any errors
+            alert("error");
+        });
+    }
+
     render() {
         return(
             <div>
-                right
+                <button onClick={this.fetchUsers}>
+                    Get registered students
+                </button>
+                <UsersList users={this.state.users}/>
             </div>
+        );
+    }
+}
+
+class UsersList extends React.Component {
+    render() {
+        const listItems = this.props.users.map((user) =>
+            <li>{user.email}</li>
+        );
+
+        return (
+            <ul>
+                {listItems}
+            </ul>
         );
     }
 }
