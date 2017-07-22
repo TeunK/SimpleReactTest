@@ -8,6 +8,26 @@ ol, ul {
     padding-left: 30px;
 }
 
+button {
+    background-color: limegreen;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    width:100%;
+    box-shadow: #757575 1px -1px 7px inset;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.userItem {
+    list-style: none;
+}
+
 .background-image{
 }
 
@@ -104,8 +124,23 @@ ol, ul {
 .w1000 {
     width:1000px;
 }
+.mbxs {
+    margin-bottom:4px;
+}
+.mbs {
+    margin-bottom:6px;
+}
+.mbm {
+    margin-bottom:10px;
+}
 .mtxxl {
     margin-top:200px;
+}
+.m0 {
+    margin:0px;
+}
+.p0 {
+    padding:0px;
 }
 .bWhtTrans {
     background: white;
