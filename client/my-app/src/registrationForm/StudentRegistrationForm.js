@@ -47,6 +47,7 @@ class StudentRegistrationForm extends React.Component {
     }
 
     submitForm(user) {
+        const self = this;
         fetch(SERVER_DATA.PATH + SERVER_DATA.endpoints.POST.registerStudent, {
             method: 'POST',
             headers: {
@@ -55,12 +56,16 @@ class StudentRegistrationForm extends React.Component {
             },
             body: JSON.stringify(user)
         })
-            .then((response) => {
-            })
-            .then((responseData) => {
-            })
-            .catch(function(err) {
-            })
+        .then(function(response) {
+            response.json().then(json => {
+                self.setState({
+                    queryResponse: json
+                });
+            });
+        })
+        .catch(function(err) {
+            alert(err);
+        });
     }
 
     getInitialState() {
@@ -74,6 +79,10 @@ class StudentRegistrationForm extends React.Component {
                 email: "",
                 password: "",
                 gender: ""
+            },
+            queryResponse: {
+                error: "",
+                message: "",
             }
         }
     }
@@ -195,6 +204,7 @@ class StudentRegistrationForm extends React.Component {
                     </label>
                 </div>
                 <input type="submit" value="Submit" />
+                <span>{this.state.queryResponse.message}</span>
             </form>
         );
     }
