@@ -1,6 +1,7 @@
 import React from 'react';
 import StudentRegistrationForm from './registrationForm/StudentRegistrationForm';
-import RenderUsers from './usersList/UsersContainer'
+import RenderUsers from './usersList/UsersContainer';
+import Dashboard from './dashboard/Dashboard';
 import { Switch, Route } from 'react-router-dom';
 
 const AppComponent = () => (
@@ -9,6 +10,7 @@ const AppComponent = () => (
             <div className="w50p flex-size-1 mh600 bWht mauto pm">
                 <Switch>
                     <Route exact path='/' component={StudentRegistrationForm}/>
+                    <Route exact path='/dashboard' component={Dashboard}/>
                 </Switch>
             </div>
             <div className="w50p flex-size-1 inline-block mh600 bWht mauto pm">

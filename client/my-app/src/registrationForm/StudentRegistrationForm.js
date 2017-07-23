@@ -95,7 +95,11 @@ class StudentRegistrationForm extends React.Component {
 
         if (testName.isValid && testEmail.isValid && testPassword.isValid && testGender.isValid) {
             this.setState({
-                error: {}
+                error: {},
+                queryResponse: {
+                    error: "",
+                    message: "",
+                }
             });
 
             return true;
@@ -193,18 +197,18 @@ class StudentRegistrationForm extends React.Component {
                     <label>
                         Gender:
                         <div>
-                            <input type="radio" name="gender" value="male" onChange={this.handleChange}/>
+                            <input type="radio" name="gender" value="male" checked={this.state.gender === "male"} onChange={this.handleChange}/>
                             <span>Male</span>
                         </div>
                         <div>
-                            <input type="radio" name="gender" value="female" onChange={this.handleChange}/>
+                            <input type="radio" name="gender" value="female" checked={this.state.gender === "female"} onChange={this.handleChange}/>
                             <span>Female</span>
                         </div>
                         <span className="validation-error">{this.state.error.gender}</span>
                     </label>
                 </div>
                 <input type="submit" value="Submit" />
-                <span>{this.state.queryResponse.message}</span>
+                <span className="t-b cRed1 fs18">{this.state.queryResponse.message}</span>
             </form>
         );
     }

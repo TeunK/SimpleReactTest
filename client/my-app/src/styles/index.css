@@ -76,6 +76,9 @@ button {
 .cGrn1 {
     color: green;
 }
+.cRed1 {
+    color: red;
+}
 .bGrn1 {
     background-color: green;
 }
@@ -142,6 +145,15 @@ button {
 .p0 {
     padding:0px;
 }
+.ptxl{
+    padding-top:20px;
+}
+.ptm{
+    padding-top:10px;
+}
+.border{
+    border:1px solid #ccc;
+}
 .bWhtTrans {
     background: white;
 }
@@ -195,4 +207,10 @@ button {
 }
 .mh600 {
     min-height:600px;
+}
+.vmid {
+    vertical-align: middle;
+}
+.fs18{
+    font-size:18px;
 }
