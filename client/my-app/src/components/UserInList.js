@@ -18,9 +18,7 @@ UserInList.propTypes = {
     user: PropTypes.shape({
         name: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
-    }).isRequired,
-    email: PropTypes.string.isRequired,
-    highlighted: PropTypes.string.isRequired
+    }).isRequired
 };
 
 export default UserInList;

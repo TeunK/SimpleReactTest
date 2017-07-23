@@ -8,10 +8,9 @@ const UsersList = (users) => {
         const highlightHeader = (index === 0) ? "t-b" : "";
 
         return (
-            <UserInList user={user} highlighted={highlightHeader}/>
+            <UserInList key={index} user={user} highlighted={highlightHeader}/>
         )
     });
-
     return (
         <ul>
             {listItems}
@@ -19,7 +18,7 @@ const UsersList = (users) => {
     )
 };
 
-UsersList.protoTypes = {
+UsersList.propTypes = {
     users: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,

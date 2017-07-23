@@ -1,6 +1,6 @@
 import React from 'react';
 import StudentRegistrationForm from './StudentRegistrationForm';
-import UsersField from './UsersField';
+import RenderUsers from '../containers/RenderUsers'
 import { Switch, Route } from 'react-router-dom';
 
 const App = () => (
@@ -12,7 +12,7 @@ const App = () => (
                 </Switch>
             </div>
             <div className="w50p flex-size-1 inline-block mh600 bWht mauto pm">
-                <UsersField/>
+                <RenderUsers/>
             </div>
         </div>
     </div>

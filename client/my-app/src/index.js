@@ -4,10 +4,18 @@ import './index.css';
 import './forms.css';
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import {createStore} from 'redux';
+import UsersApp from './reducers';
+
+let store = createStore(UsersApp);
+
 
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
     document.getElementById('root')
 );

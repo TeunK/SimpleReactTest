@@ -1,53 +1,25 @@
 import React from 'react';
 import UsersList from './UsersList';
-import serverData from '../configs/Server';
+import PropTypes from 'prop-types';
 
-class UsersField extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: []
-        };
+const UsersField = ({users, fetchUsers}) => (
 
-        this.fetchUsers = this.fetchUsers.bind(this);
-    }
+    <div>
+        <button onClick={fetchUsers}>
+            Get registered students
+        </button>
+        <UsersList users={users}/>
+    </div>
+);
 
-    fetchUsers() {
-        const self = this;
-        fetch(serverData.path + serverData.endpoints.GET.allStudents, {
-            //mode: 'no-cors',
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-            },
-        })
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(json => {
-                    self.setState({
-                        users: json
-                    });
-                });
-            } else {
-                alert("error")
-            }
-        })
-        .catch(function(err) {
-            // This is where you run code if the server returns any errors
-            alert("error");
-        });
-    }
-
-    render() {
-        return(
-            <div>
-                <button onClick={this.fetchUsers}>
-                    Get registered students
-                </button>
-                <UsersList users={this.state.users}/>
-            </div>
-        );
-    }
-}
+UsersField.propTypes = {
+    users: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired
+        }).isRequired
+    ).isRequired,
+    fetchUsers: PropTypes.func.isRequired
+};
 
 export default UsersField
