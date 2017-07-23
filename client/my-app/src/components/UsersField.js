@@ -21,21 +21,21 @@ class UsersField extends React.Component {
                 Accept: 'application/json',
             },
         })
-            .then(function(response) {
-                if (response.ok) {
-                    response.json().then(json => {
-                        self.setState({
-                            users: json
-                        });
+        .then(function(response) {
+            if (response.ok) {
+                response.json().then(json => {
+                    self.setState({
+                        users: json
                     });
-                } else {
-                    alert("error")
-                }
-            })
-            .catch(function(err) {
-                // This is where you run code if the server returns any errors
-                alert("error");
-            });
+                });
+            } else {
+                alert("error")
+            }
+        })
+        .catch(function(err) {
+            // This is where you run code if the server returns any errors
+            alert("error");
+        });
     }
 
     render() {

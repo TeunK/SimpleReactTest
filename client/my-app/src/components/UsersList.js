@@ -1,35 +1,32 @@
 import React from 'react';
+import UserInList from './UserInList';
+import PropTypes from 'prop-types';
 
-class UsersList extends React.Component {
-    render() {
-        const header = [{name:"Name", email:"Email"}];
-        const users = this.props.users;
-
-
-
-        const listItems = header.concat(users).map((user, index) => {
-            const highlightHeader = (index === 0) ? "t-b" : "";
-
-            return (
-                <li className="userItem mbs">
-                    <div>
-                        <div className={"w50p float-l " + highlightHeader}>
-                            {user.name}
-                        </div>
-                        <div className={"w50p float-r " + highlightHeader}>
-                            {user.email}
-                        </div>
-                    </div>
-                </li>
-            )
-        });
+const UsersList = (users) => {
+    const header = [{name: "Name", email: "Email"}];
+    const listItems = header.concat(users.users).map((user, index) => {
+        const highlightHeader = (index === 0) ? "t-b" : "";
 
         return (
-            <ul>
-                {listItems}
-            </ul>
-        );
-    }
-}
+            <UserInList user={user} highlighted={highlightHeader}/>
+        )
+    });
+
+    return (
+        <ul>
+            {listItems}
+        </ul>
+    )
+};
+
+UsersList.protoTypes = {
+    users: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            email: PropTypes.string.isRequired
+        }).isRequired
+    ).isRequired
+};
+
 
 export default UsersList;
