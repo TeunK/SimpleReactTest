@@ -41,6 +41,9 @@ To startup the (frontend) client, again, ensure NodeJS is installed so that you 
 ##### Front and Back-end validation
 ![alt text](https://i.gyazo.com/a1056a2646499e8aca33dd09768892c5.jpg)
 
+##### Exact email format requirement
+![alt text](https://i.gyazo.com/dd227af1acc5cceb8ffd8d6b7d3d0e89.gif)
+
 ##### Server registration response
 ![alt text](https://i.gyazo.com/5f26480385d7a2e09e9dc33357b9fbbc.jpg)
 
