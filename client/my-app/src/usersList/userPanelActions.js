@@ -47,9 +47,6 @@ function receiveUsers(users) {
 export function fetchUsers() {
 
     return function (dispatch) {
-        // First dispatch: the app state is updated to inform
-        // that the API call is starting.
-
         dispatch(queryUsers());
         return fetch(SERVER_DATA.PATH + SERVER_DATA.endpoints.GET.allStudents, {
                 method: 'GET',
@@ -61,35 +58,7 @@ export function fetchUsers() {
                 error => console.log('An error occured.', error)
             )
             .then(json =>
-                // We can dispatch many times!
-                // Here, we update the app state with the results of the API call.
-
                 dispatch(receiveUsers(json))
             )
     }
 }
-
-//
-//
-// const self = this;
-// fetch(SERVER_DATA.PATH + SERVER_DATA.endpoints.GET.allStudents, {
-//     method: 'GET',
-//     headers: {
-//         Accept: 'application/json',
-//     },
-// })
-// .then(function(response) {
-//     if (response.ok) {
-//         response.json().then(json => {
-//             self.setState({
-//                 users: json
-//             });
-//         });
-//     } else {
-//         alert("error")
-//     }
-// })
-// .catch(function(err) {
-//     // This is where you run code if the server returns any errors
-//     alert("error");
-// });
