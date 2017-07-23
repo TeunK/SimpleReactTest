@@ -1,5 +1,5 @@
-const serverData = {
-    path: "http://localhost:3000",
+export const SERVER_DATA = {
+    PATH: 'http://localhost:3000',
     endpoints: {
         POST: {
             registerStudent: "/register_student"
@@ -10,4 +10,4 @@ const serverData = {
     }
 };
 
-export default serverData;
+export default SERVER_DATA;

@@ -1,6 +1,6 @@
 import React from 'react'
 import CryptoJS from 'crypto-js'
-import serverData from '../configs/Server';
+import SERVER_DATA from '../configs/Server';
 
 class StudentRegistrationForm extends React.Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class StudentRegistrationForm extends React.Component {
     }
 
     submitForm(user) {
-        fetch(serverData.path + serverData.endpoints.POST.registerStudent, {
+        fetch(SERVER_DATA.PATH + SERVER_DATA.endpoints.POST.registerStudent, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

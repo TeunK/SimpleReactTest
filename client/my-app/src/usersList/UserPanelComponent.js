@@ -1,18 +1,18 @@
 import React from 'react';
-import UsersList from './UsersList';
+import UserList from './UserListComponent';
 import PropTypes from 'prop-types';
 
-const UsersField = ({users, fetchUsers}) => (
+const UserPanel = ({users, fetchUsers}) => (
 
     <div>
         <button onClick={fetchUsers}>
             Get registered students
         </button>
-        <UsersList users={users}/>
+        <UserList users={users}/>
     </div>
 );
 
-UsersField.propTypes = {
+UserPanel.propTypes = {
     users: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
@@ -22,4 +22,4 @@ UsersField.propTypes = {
     fetchUsers: PropTypes.func.isRequired
 };
 
-export default UsersField
+export default UserPanel

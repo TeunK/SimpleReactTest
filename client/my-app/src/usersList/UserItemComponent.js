@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserInList = ({user, highlighted}) => (
+const UserItem = ({user, highlighted}) => (
     <li className="userItem mbs">
         <div>
             <div className={"w50p float-l " + highlighted}>
@@ -14,11 +14,11 @@ const UserInList = ({user, highlighted}) => (
     </li>
 );
 
-UserInList.propTypes = {
+UserItem.propTypes = {
     user: PropTypes.shape({
         name: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
     }).isRequired
 };
 
-export default UserInList;
+export default UserItem;

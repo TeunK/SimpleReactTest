@@ -1,9 +1,9 @@
 import React from 'react';
-import StudentRegistrationForm from './StudentRegistrationForm';
-import RenderUsers from '../containers/RenderUsers'
+import StudentRegistrationForm from './registrationForm/StudentRegistrationForm';
+import RenderUsers from './usersList/UsersContainer'
 import { Switch, Route } from 'react-router-dom';
 
-const App = () => (
+const AppComponent = () => (
     <div className="background-image">
         <div className="mauto flex bdrs w1000 bdr-rm mtxxl">
             <div className="w50p flex-size-1 mh600 bWht mauto pm">
@@ -18,4 +18,4 @@ const App = () => (
     </div>
 );
 
-export default App;
+export default AppComponent;

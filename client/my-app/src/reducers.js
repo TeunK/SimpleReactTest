@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import {FETCH_USERS, ADD_USER} from './actions';
+import {FETCH_USERS, ADD_USER} from './usersList/userPanelActions';
 
-const initialState = {
+const initialUsersListState = {
     users: []
 };
 
-function usersApp(state=initialState, action) {
+function usersApp(state=initialUsersListState, action) {
     switch (action.type) {
         case FETCH_USERS:
             return Object.assign({}, state, {

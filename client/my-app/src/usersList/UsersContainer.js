@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import UsersField from '../components/UsersField'
-import { fetchUsers } from '../actions';
+import UsersField from './UserPanelComponent'
+import { fetchUsers } from './userPanelActions';
 
 const mapStateToProps = state => {
     return {
