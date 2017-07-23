@@ -17,7 +17,7 @@ If you want to run this yourself, and you have not already installed MongoDB, [U
 
 To activate the database, run the following command after pointing to the MongoDB installation folder in your system environment variables:
 
-$ mongod --dbpath <FILEPATH> 
+$ mongod --dbpath FILEPATH
 
 Note: FILEPATH should be the data folder, i.e. `SimpleReactTest/server/data/`.
 
